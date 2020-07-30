@@ -24,9 +24,13 @@
 
 <!-- Custom styles for this template -->
 <link href="/resources/css/custom.css" rel="stylesheet">
+<link href="/resources/css/views/main.css" rel="stylesheet">
+<link href="/resources/css/views/menu.css" rel="stylesheet">
+<link href="/resources/css/gyj/pmenu.css" rel="stylesheet">
 </head>
-
 <body>
+<div><a href="/"><img src="/resources/img/common/logo.png" id="logo"></a></div>
 <div class="form-group">
 <input type="hidden" value="${mid}" id="hddn_mid"/>
 </div>
+

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+/* 4개의메뉴 */
+
+section{
+	background-color : #fffff0;
+} 
+
+.custm_01 {
+	padding: 10%;
+}
+
+#fourmenu{
+	display: flex;  
+  border: 1px solid ;
+  align-items: center;
+  height: 100%;  
+  color : #007bff;  
+}
+
+pricing.card{
+	border: none;
+	border-radius: 1rem;
+	transition: all 0.2s;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+	margin: auto;
+	float: none;
+}
+
+.card {
+	margin: auto;
+	float: none;
+}
+
+.card-body{
+	background: #007bff;
+	font-weight : bold;
+	text-decoration : none;
+	
+}
+a {
+ color : #fffff0;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

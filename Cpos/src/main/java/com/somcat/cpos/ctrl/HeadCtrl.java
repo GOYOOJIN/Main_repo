@@ -36,6 +36,10 @@ public class HeadCtrl {
 	
 	@Inject
 	HeadServiceIntf hsv;	
+	
+	@GetMapping("/pmenu")
+	public void pmenu() {
+	}
 
 	@GetMapping("/pregist")
 	public void regist() {
@@ -48,6 +52,12 @@ public class HeadCtrl {
 			reAttr.addFlashAttribute("pSign", "상품등록완료");
 		}
 		return "redirect:/head/plist";		
+	}
+	
+	@GetMapping("/pdetail")
+	public void detail(@RequestParam("barcode") int barcode, Model model, RedirectAttributes reAttr,
+			@ModelAttribute("cri") Criterion cri) {
+		model.addAttribute("hvo", hsv.getProduct(barcode));
 	}
 	
 	

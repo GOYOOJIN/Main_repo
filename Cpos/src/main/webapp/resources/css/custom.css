@@ -1,4 +1,3 @@
-
 @charset "UTF-8";
 
 /*!
@@ -6,33 +5,44 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-full-width-pics/blob/master/LICENSE)
  */
-body {
-  padding-top: 56px;
+/* *{background-color : #fffff0;} */
+
+
+#logo {
+	width: 10%;
+	height: 7%;
+	color: #007bff;
 }
-#cmtList ul{
+
+head {
+	background: #fffff0;
+}
+
+body {
+	
+}
+
+#cmtList ul {
 	border-bottom: 1px solid black;
 	margin-bottom: 10px;
 }
 
 .bg-image-full {
-  background: no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+	background: no-repeat center center scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
 }
 
-<<<<<<< HEAD
 .qnt {
 	width: 80px;
 }
 
-.scrap option:hover{
+.scrap option:hover {
 	background: #ddd;
 }
 
-ul.fa-ul{
+ul.fa-ul {
 	padding-right: 20px;
 }
-=======
->>>>>>> 5610de9ed6b7cf79b16afed0fef844552ac08a0c

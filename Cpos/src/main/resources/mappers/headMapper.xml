@@ -30,7 +30,8 @@
 	select * from tbl_head where barcode=#{barcdoe}
 </select>
 <update id="modify" parameterType="HeadVO">
-update tbl_head set pname=#{pname}, expire_term=#{expire_term}, get_price=#{get_price}, discount_rate=#{discount_rate},status=#{status}
+update tbl_head set pname=#{pname}, expire_term=#{expire_term}, get_price=#{get_price}, sell_price=#{sell_price}, 
+discount_rate=#{discount_rate},status=#{status}
 where barcode = #{barcode} 
 </update>
 <delete id="remove" parameterType="java.lang.Integer">

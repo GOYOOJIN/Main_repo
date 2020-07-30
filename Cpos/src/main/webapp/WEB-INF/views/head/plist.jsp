@@ -7,21 +7,51 @@
 	<div class="container">
 		<div>
 			<div>
-			<div class="btn-group">
-			  <a href="/head/pregist" class="btn btn-primary">상품등록</a>
-			</div> 
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary" id="mBtn">상품수정</button>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary" id="rBtn">상품삭제</button>
-		  </div>
-		  <div class="btn-group">
-				<a href="/head/large?large=${cvo.large }" class="btn btn-primary">대분류</a>
-			</div>
-			<div class="btn-group">
-				<a href="/head/medium?large=${cvo.large }&medium=${cvo.medium }" class="btn btn-primary">중분류</a>
-			</div>
+				<c:choose>
+					<c:when test="${pList ne null && pList.size() != 0 }">
+						<div class="btn-group">
+							<a href="/head/pregist" class="btn btn-primary">상품등록</a>
+						</div>
+						<div class="form-group btn-group">						
+							<div>
+								<select class="form-control" id="large" name="large">
+									<option>대분류</option>
+									<option>10</option>
+									<option>20</option>
+									<option>30</option>
+									<option>40</option>
+									<option>50</option>
+								</select>
+							</div>
+							<div>
+								<select class="form-control" id="medium" name="medium">
+									<option>중분류</option>
+									<option>01</option>
+									<option>02</option>
+									<option>03</option>
+								</select>
+							</div>
+							<button type="button" class="btn btn-primary" id="cateBtn">분류별 리스트</button>
+						</div>						
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" id="mBtn">상품수정</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" id="rBtn">상품삭제</button>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="btn-group">
+							<a href="/head/pregist" class="btn btn-primary">상품등록</a>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" name="largeBtn">대분류</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" name="mediumBtn">중분류</button>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<c:choose>
@@ -89,6 +119,13 @@
 		alert(pSign);
 	} 	
 	
+	$(document).on("click", ".bg-primary ", function(e) {
+		e.preventDefault();
+		barcodeVal = $(this).find("div:first-child").text();
+		location.href = "/head/pdetail?barcode=" + barcodeVal;
+	});
+
+	
 	let mBtn = document.getElementById('mBtn');
 	mBtn.onclick = function(event) {
 		$(".card").attr('class', 'card bg-info text-white btn');		
@@ -117,7 +154,7 @@
 			type : "post",
 			data : {barcode : barcodeVal}
 		}).done(function(){
-			alert("삭제성공");
+			alert("상품삭제성공");
 			location.href="/head/plist";
 		});
 	});

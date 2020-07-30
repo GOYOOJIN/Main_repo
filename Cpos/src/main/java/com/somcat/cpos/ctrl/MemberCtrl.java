@@ -64,7 +64,7 @@ public class MemberCtrl {
 			if(minfo.getOpt()==0) {
 				return "/store/nav";
 			}else if(minfo.getOpt()==1) {
-				return "/head/plist";
+				return "/head/hmenu";
 			}
 		}else {
 			reAttr.addFlashAttribute("msg", "로그인에 실패했습니다");

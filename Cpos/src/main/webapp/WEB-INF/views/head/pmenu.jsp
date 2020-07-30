@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="/resources/css/gyj/yj.css" rel="stylesheet">
-<%-- <jsp:include page="../common/header.jsp"></jsp:include> --%>
+
+<jsp:include page="../common/header.jsp"></jsp:include> 
 <section class="pricing py-5">
   <div class="container">
     <div class="row custm_a1">
@@ -35,4 +35,4 @@
       </div>
     </div>
 </section>
-<%-- <jsp:include page="../common/header.jsp"></jsp:include> --%>
+<jsp:include page="../common/footer.jsp"></jsp:include> 

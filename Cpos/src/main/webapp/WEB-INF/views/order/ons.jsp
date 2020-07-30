@@ -28,7 +28,7 @@
 					class="btn btn-block btn-primary text-uppercase">GO</a>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" >
 				<div class="card-body">
 					<h5 class="card-title text-muted text-uppercase text-center">통계
 						시스템</h5>

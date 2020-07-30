@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/* 처음도입부 */
+
+
+
+#somcat { 
+	display: flex;
+  justify-content: center;
+  border: 1px solid #f7f8f3;
+  align-items: center;
+  height: 80%;
+  text-decoration : none; 	 
+  font-size : 100px;
+  color : #007bff;
+  background-color : #fffff0;
+}
+
+footer {
+	background-color : #fffff0;
+}
+
