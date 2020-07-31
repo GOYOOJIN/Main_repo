@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: progo
-=======
-Built-By: EZEN
->>>>>>> 6cd57389b156b2c010f778c7e2e54f9d80f2587e
 Build-Jdk: 1.8.0_251
 Created-By: Maven Integration for Eclipse
 
