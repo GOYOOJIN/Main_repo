@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: progo
 Build-Jdk: 1.8.0_251
+=======
+Built-By: syk84
+Build-Jdk: 1.8.0_231
+>>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 Created-By: Maven Integration for Eclipse
 

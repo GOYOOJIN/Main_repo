@@ -73,4 +73,7 @@ public class HeadDAO implements HeadDAOIntf{
 	public HeadVO selectProduct(int barcode) {
 		return sql.selectOne(hs+"detail", barcode);
 	}
+	public List<HeadVO> selectHList(int category){
+		return sql.selectList(hs+"hlist", category);
+	}
 }

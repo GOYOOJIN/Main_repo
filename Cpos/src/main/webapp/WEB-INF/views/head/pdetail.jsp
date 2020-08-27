@@ -19,4 +19,8 @@
 			  <a href="/head/plist" class="btn btn-primary">리스트로</a>
  	</div>    
 </div>
+<<<<<<< HEAD
 </section>
+=======
+</section>
+>>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e

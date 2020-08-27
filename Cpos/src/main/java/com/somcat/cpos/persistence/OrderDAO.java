@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.somcat.cpos.domain.CategoryVO;
 import com.somcat.cpos.domain.Criterion;
 import com.somcat.cpos.domain.HeadVO;
 import com.somcat.cpos.domain.MemberVO;
@@ -28,8 +29,8 @@ public class OrderDAO implements OrderDAOIntf {
 	SqlSession sql;
 
 	@Override
-	public int insertOrder(OrderVO ovo) {
-		return sql.insert(ns + "order", ovo);
+	public int insertOrder(List<OrderVO> ovos) {
+		return sql.insert(ns + "order", ovos);
 	}
 
 	@Override
@@ -58,51 +59,8 @@ public class OrderDAO implements OrderDAOIntf {
 	}
 
 	@Override
-	public int insertProduct(MemberVO mvo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int selectBarcode(String id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int selectPname(String id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<HeadVO> selectHeadlist(Criterion cri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<String> selectLargeCate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<String> selectMediumCate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updateProduct(HeadVO hvo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteProduct(int bacode) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<CategoryVO> selectMediumCates(String large) {
+		return sql.selectList(ns+"mCtgs", large);
 	}
 
 	@Override
@@ -120,10 +78,23 @@ public class OrderDAO implements OrderDAOIntf {
 
 	@Override
 	public int selectUnderAmount(OrderVO ovo, int pageNum) {
-		Map<Object, Object> map = new HashMap<>();
-		map.put("pageNum", pageNum);
-		map.put("ovo",ovo);
-		return sql.selectOne(ns+"underAmountCount", map);
+		Map<Object, Object> map1 = new HashMap<>();
+		map1.put("pageNum", pageNum);
+		map1.put("ovo",ovo);
+		return sql.selectOne(ns+"underAmountCount", map1);
+	}
+
+	@Override
+	public int getWrapno() {
+		return sql.selectOne(ns+"getWrapno");
+	}
+
+	@Override
+	public int updateOrderStatus(int wrap_no, int status) {
+		Map<String, Integer> map2 = new HashMap<>();
+		map2.put("wrap_no", wrap_no);
+		map2.put("status",status);
+		return sql.update(ns+"changeOrderStatus",map2);
 	}
 
 }

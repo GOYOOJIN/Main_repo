@@ -17,4 +17,5 @@ public interface HeadServiceIntf {
 	public int modify(HeadVO hvo);
 	public int remove(int barcode);	
 	public int getTotalCount();
+	public List<HeadVO> getHList(int category);
 }

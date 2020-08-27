@@ -24,7 +24,7 @@
 						<li><span class="fa-li"><i class="fas fa-check"></i></span>상품
 							자동 재고등록</li>
 					</ul>
-					<a href="/order/orderlist?member_id=${mid}&pageNum=1&flag_hdate=&flag_tdate=" 
+					<a href="/order/orderlist?member_id=${mvo.member_id}&pageNum=1&flag_hdate=&flag_tdate=" 
 					class="btn btn-block btn-primary text-uppercase">GO</a>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 						<li><span class="fa-li"><i class="fas fa-check"></i></span>AI
 							상품 추천</li>
 					</ul>
-					<a href="/order/cal"
+					<a href="#"
 						class="btn btn-block btn-primary text-uppercase">GO</a>
 				</div>
 			</div>
