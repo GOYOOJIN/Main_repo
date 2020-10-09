@@ -1,43 +1,5 @@
 @charset "UTF-8";
 
-<<<<<<< HEAD
-/*!
- * Start Bootstrap - Full Width Pics (https://startbootstrap.com/template-overviews/full-width-pics)
- * Copyright 2013-2019 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-full-width-pics/blob/master/LICENSE)
- */
-/* *{background-color : #fffff0;} */
-
-
-#logo {
-	width: 10%;
-	height: 7%;
-	color: #007bff;
-}
-
-head {
-	background: #fffff0;
-}
-
-body {
-	
-}
-
-#cmtList ul {
-	border-bottom: 1px solid black;
-	margin-bottom: 10px;
-}
-
-.bg-image-full {
-	background: no-repeat center center scroll;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	-o-background-size: cover;
-}
-
-=======
-
 /* 공통부분 - 유진 */
 /* body {
 	height : 100%;  
@@ -66,7 +28,6 @@ body #logo{
 }
 
 /* 은혜 */
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 .qnt {
 	width: 80px;
 }
@@ -77,9 +38,6 @@ body #logo{
 
 ul.fa-ul {
 	padding-right: 20px;
-<<<<<<< HEAD
-}
-=======
 }
 
 section.ivory {
@@ -118,4 +76,4 @@ section{
 	margin-bottom: 150px;
 }
 
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
+

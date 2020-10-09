@@ -24,11 +24,6 @@
 
 <!-- Custom styles for this template -->
 <link href="/resources/css/custom.css" rel="stylesheet">
-<<<<<<< HEAD
-<link href="/resources/css/views/main.css" rel="stylesheet">
-<link href="/resources/css/views/menu.css" rel="stylesheet">
-<link href="/resources/css/gyj/pmenu.css" rel="stylesheet">
-=======
 <link href="/resources/css/gyj/mainlogo.css" rel="stylesheet">
 <link href="/resources/css/gyj/headmenu.css" rel="stylesheet">
 <link href="/resources/css/gyj/mainlogo.css" rel="stylesheet"> 
@@ -38,17 +33,9 @@
 <link href="/resources/css/gyj/pmodify.css" rel="stylesheet">
 <link href="/resources/css/gyj/mainlogo.css" rel="stylesheet">
 <link href="/resources/css/lji/ji.css" rel="stylesheet">
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 </head>
-<body>
-<<<<<<< HEAD
-<div><a href="/"><img src="/resources/img/common/logo.png" id="logo"></a></div>
-<div class="form-group">
-<input type="hidden" value="${mid}" id="hddn_mid"/>
-</div>
 
-=======
+<body>
 <div id="logo"><a href="/">
 <img class="img-fluid d-block mx-auto" src="../resources/img/5omcat_logo.png">
 </a></div>
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e

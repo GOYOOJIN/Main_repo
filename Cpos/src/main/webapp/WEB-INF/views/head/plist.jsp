@@ -6,21 +6,13 @@
 <section class="py-5">
 	<div class="container" id="listform">
 		<div>
-<<<<<<< HEAD
-			<div>
-=======
 			<div id="headnav">
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 				<c:choose>
 					<c:when test="${pList ne null && pList.size() != 0 }">
 						<div class="btn-group">
 							<a href="/head/pregist" class="btn btn-primary">상품등록</a>
 						</div>
-<<<<<<< HEAD
-						<div class="form-group btn-group">						
-=======
 						<!-- <div class="form-group btn-group">						
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 							<div>
 								<select class="form-control" id="large" name="large">
 									<option>대분류</option>
@@ -40,13 +32,8 @@
 								</select>
 							</div>
 							<button type="button" class="btn btn-primary" id="cateBtn">분류별 리스트</button>
-<<<<<<< HEAD
-						</div>						
-						<div class="btn-group">
-=======
 						</div>						 -->
 						<div class="btn-group" id="listmenu">
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 							<button type="button" class="btn btn-primary" id="mBtn">상품수정</button>
 						</div>
 						<div class="btn-group">
@@ -57,20 +44,12 @@
 						<div class="btn-group">
 							<a href="/head/pregist" class="btn btn-primary">상품등록</a>
 						</div>
-<<<<<<< HEAD
-						<div class="btn-group">
-=======
 						<!-- <div class="btn-group">
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 							<button type="button" class="btn btn-primary" name="largeBtn">대분류</button>
 						</div>
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary" name="mediumBtn">중분류</button>
-<<<<<<< HEAD
-						</div>
-=======
 						</div> -->
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -143,21 +122,6 @@
 	let pSign = '<c:out value="${pSign}"/>';
 	if (pSign != '') {
 		alert(pSign);
-<<<<<<< HEAD
-	} 	
-	
-	$(document).on("click", ".bg-primary ", function(e) {
-		e.preventDefault();
-		barcodeVal = $(this).find("div:first-child").text();
-		location.href = "/head/pdetail?barcode=" + barcodeVal;
-	});
-
-	
-	let mBtn = document.getElementById('mBtn');
-	mBtn.onclick = function(event) {
-		$(".card").attr('class', 'card bg-info text-white btn');		
-=======
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 	}
 
 	/* $(document).on("click", "#cateBtn" , function(e){
@@ -207,19 +171,12 @@
 		$.ajax({
 			url : "/head/premove",
 			type : "post",
-<<<<<<< HEAD
-			data : {barcode : barcodeVal}
-		}).done(function(){
-			alert("상품삭제성공");
-			location.href="/head/plist";
-=======
 			data : {
 				barcode : barcodeVal
 			}
 		}).done(function() {
 			alert("상품삭제성공");
 			location.href = "/head/plist";
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 		});
 	});
 </script>

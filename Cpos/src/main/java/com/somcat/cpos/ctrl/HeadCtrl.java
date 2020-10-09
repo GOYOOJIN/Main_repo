@@ -40,12 +40,6 @@ public class HeadCtrl {
 	private static Logger log = LoggerFactory.getLogger(HeadCtrl.class);
 
 	@Inject
-<<<<<<< HEAD
-	HeadServiceIntf hsv;	
-	
-	@GetMapping("/pmenu")
-	public void pmenu() {
-=======
 	HeadServiceIntf hsv;
 	
 
@@ -61,10 +55,8 @@ public class HeadCtrl {
 	@GetMapping("/plist")
 	public void list(Model model, Criterion cri) {
 		model.addAttribute("pList", hsv.getHeadList(cri));
-		log.info(">>>>>>>>>>> check1");
 		int totalCount = hsv.getTotalCount();
 		model.addAttribute("pgvo", new PagingVO(totalCount, cri));
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 	}
 
 	@GetMapping("/pregist")
@@ -79,8 +71,7 @@ public class HeadCtrl {
 		}
 		return "redirect:/head/plist";
 	}
-<<<<<<< HEAD
-	
+
 	@GetMapping("/pdetail")
 	public void detail(@RequestParam("barcode") int barcode, Model model, RedirectAttributes reAttr,
 			@ModelAttribute("cri") Criterion cri) {
@@ -88,16 +79,7 @@ public class HeadCtrl {
 	}
 	
 	
-=======
 
-	@GetMapping("/pdetail")
-	public void detail(@RequestParam("barcode") int barcode, Model model, RedirectAttributes reAttr,
-			@ModelAttribute("cri") Criterion cri) {
-
-		model.addAttribute("hvo", hsv.getProduct(barcode));
-	}
-
->>>>>>> 51d12b05994f6778c63982d9daf02c3f0a01312e
 	@GetMapping("/pmodify")
 	public void modify(@RequestParam("barcode") int barcode, Model model, RedirectAttributes reAttr,
 			@ModelAttribute("cri") Criterion cri) {
@@ -107,8 +89,7 @@ public class HeadCtrl {
 	@PostMapping("/pmodify")
 	public String modify(Model model, HeadVO hvo, Criterion cri, RedirectAttributes reAttr) {
 		int isOk = hsv.modify(hvo);
-		log.info(">>>>>" + isOk);
-
+		
 		if (isOk > 0) {
 			reAttr.addFlashAttribute("pSign", "상품수정완료");
 		}
