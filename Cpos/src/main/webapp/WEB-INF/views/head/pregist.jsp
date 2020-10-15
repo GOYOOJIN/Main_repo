@@ -13,6 +13,7 @@
       <div class="form-group">
       	<label for="large">대분류</label>
       	<select class="form-control" id="large" name="large">
+      	<option value="-1" selected>선택</option>
         	<option value="10">냉장</option>
         	<option value="20">냉동</option>
         	<option value="30">실온</option>
@@ -23,9 +24,20 @@
       <div class="form-group">
       	<label for="medium">중분류</label>
       	<select class="form-control" id="medium" name="medium">
-        	<option>01</option>
-        	<option>02</option>
-        	<option>03</option>
+      		<option value="-1" selected>선택</option>
+        	<option value="01">음료</option>
+        	<option value="02">채소/과일</option>
+        	<option value="03">정육</option>
+        	<option value="01">아이스</option>
+        	<option value="02">가공식품</option>
+        	<option value="01">과자류</option>
+        	<option value="02">라면</option>
+        	<option value="03">조미료</option>
+        	<option value="01">의류</option>
+        	<option value="02">위생용품</option>
+        	<option value="03">기타</option>
+        	<option value="01">주류</option>
+        	<option value="02">담배</option>
       	</select>          
       </div>       
       <div class="form-group">

@@ -12,44 +12,52 @@
 						<div class="btn-group">
 							<a href="/head/pregist" class="btn btn-primary">상품등록</a>
 						</div>
-						<!-- <div class="form-group btn-group">						
-							<div>
-								<select class="form-control" id="large" name="large">
-									<option>대분류</option>
-									<option>10</option>
-									<option>20</option>
-									<option>30</option>
-									<option>40</option>
-									<option>50</option>
-								</select>
-							</div>
-							<div>
-								<select class="form-control" id="medium" name="medium">
-									<option>중분류</option>
-									<option>01</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<button type="button" class="btn btn-primary" id="cateBtn">분류별 리스트</button>
-						</div>						 -->
 						<div class="btn-group" id="listmenu">
 							<button type="button" class="btn btn-primary" id="mBtn">상품수정</button>
 						</div>
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary" id="rBtn">상품삭제</button>
 						</div>
+						<button type="button" class="btn btn-primary"
+							data-toggle="collapse" data-target="#catelist" id="cateBtn">분류별
+							리스트</button>
+						<div id="catelist" class="collapse">
+							<div class="form-group">
+								<label for="large">대분류</label> <select class="form-control"
+									id="large" name="large">
+									<option value="-1" selected>선택</option>
+									<option value="10">냉장</option>
+									<option value="20">냉동</option>
+									<option value="30">실온</option>
+									<option value="40">생필품</option>
+									<option value="50">기호품</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="medium">중분류</label> <select class="form-control"
+									id="medium" name="medium">
+									<option value="-1" selected>선택</option>
+									<option value="01">음료</option>
+									<option value="02">채소/과일</option>
+									<option value="03">정육</option>
+									<option value="01">아이스</option>
+									<option value="02">가공식품</option>
+									<option value="01">과자류</option>
+									<option value="02">라면</option>
+									<option value="03">조미료</option>
+									<option value="01">의류</option>
+									<option value="02">위생용품</option>
+									<option value="03">기타</option>
+									<option value="01">주류</option>
+									<option value="02">담배</option>
+								</select>
+							</div>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="btn-group">
 							<a href="/head/pregist" class="btn btn-primary">상품등록</a>
 						</div>
-						<!-- <div class="btn-group">
-							<button type="button" class="btn btn-primary" name="largeBtn">대분류</button>
-						</div>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary" name="mediumBtn">중분류</button>
-						</div> -->
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -57,13 +65,11 @@
 				<c:choose>
 					<c:when test="${pList ne null && pList.size() != 0 }">
 						<c:forEach items="${pList }" var="hvo">
-
 							<div class="card bg-primary text-white col-4" id="detailBtn">
 								<div class="card-body" id="bar">${hvo.barcode }</div>
 								<div class="card-body" id="pNm">${hvo.pname }</div>
 								<div class="card-body" id="cg">${hvo.category }</div>
 							</div>
-
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
@@ -73,11 +79,7 @@
 				</c:choose>
 			</div>
 
-			<%-- <c:if test="${sesInfo.id ne null}">
-				<div>
-					<a href="/head/pregist" class="btn btn-success">상품등록</a>
-				</div>
-			</c:if> --%>
+			
 		</div>
 		<div>
 			<ul class="pagination">

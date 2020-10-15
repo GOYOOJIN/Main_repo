@@ -64,6 +64,7 @@ public class MemberCtrl {
 			if(minfo.getOpt()==0) {
 				return "/head/fourmenu";
 			}else if(minfo.getOpt()==1) {
+				return "/head/headmenu";
 			}
 		}else {
 			reAttr.addFlashAttribute("msg", "로그인에 실패했습니다");

@@ -70,22 +70,22 @@
 <section class="pricing py-5">
 	<div class="container mt-3">
 		<h2>발주 리스트</h2>
+		<!-- 로그인 되어 있을 경우만 발주버튼 생성 -->
 		<c:if test="${mvo ne null}">
-		<button type="button" class="btn btn-primary ordBtn" data-toggle="modal"
-			data-target=".ordmodal">발주</button>
+			<button type="button" class="btn btn-primary ordBtn"
+				data-toggle="modal" data-target=".ordmodal">발주</button>
 		</c:if>
-		<!-- The Modal -->
+
+		<!-- The Modal01 -->
 		<div class="modal fade ordmodal">
 			<div style="overflow-x: initial !important;"
 				class="modal-dialog modal-xl modal-dialog-centered">
 				<div class="modal-content">
-
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title">발주 등록</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-
 					<!-- Modal body -->
 					<div class="modal-body">
 						<div class="form-group">
@@ -103,12 +103,25 @@
 							<label for="mediumCtg">중분류:</label> <select class="form-control"
 								id="mediumCtg" name="mediumCtg">
 								<option value="-1" selected>선택</option>
+								<option value="01">음료</option>
+								<option value="02">채소/과일</option>
+								<option value="03">정육</option>
+								<option value="01">아이스</option>
+								<option value="02">가공식품</option>
+								<option value="01">과자류</option>
+								<option value="02">라면</option>
+								<option value="03">조미료</option>
+								<option value="01">의류</option>
+								<option value="02">위생용품</option>
+								<option value="03">기타</option>
+								<option value="01">주류</option>
+								<option value="02">담배</option>
 							</select>
 						</div>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="largeCtg">상품 리스트:</label>
+							<label for="largeCtg">상품 리스트: </label>
 							<div class="plistSlot"></div>
 						</div>
 					</div>
@@ -123,13 +136,12 @@
 						<button type="button" id="ord_insert_btn" class="btn btn-warning">등록</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 					</div>
-
 				</div>
 			</div>
 		</div>
-		
-		
-		<!-- The Modal2 -->
+
+
+		<!-- The Modal02 -->
 		<div class="modal fade" id="ordStatModal">
 			<div style="overflow-x: initial !important;"
 				class="modal-dialog modal-xl modal-dialog-centered">
@@ -143,8 +155,7 @@
 						<h4 class="modal-title">=======발주 내역=======</h4>
 					</div>
 					<!-- Modal body -->
-					<div class="modal-body">
-					</div>
+					<div class="modal-body"></div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<button type="button" id="ord_done_btn" class="btn btn-warning">수령완료</button>
@@ -153,38 +164,39 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+		<!-- 기본화면 -->
 		<p>
 			공지 <span>: 다음 주부터 칸쵸 1+1 행사가 진행됩니다.</span>
 		</p>
 		<span>기간 조회 : </span><input type="text" name="date1" id="date1"
-			size="12"/> ~ <input type="text" name="date2" id="date2" size="12"/>
+			size="12" /> ~ <input type="text" name="date2" id="date2" size="12" />
 		<button type="button" id="ord_chkupBtn">조회</button>
 		<c:choose>
 			<c:when test="${ordWL ne null && ordWL.size() != 0 }">
 				<c:forEach items="${ordWL}" var="ovol">
 					<div class="media border p-3 ordBorder">
 						<c:forEach items="${ovol}" var="ovo1" begin="0" end="0">
-						
-						<img src="/resources/img/<c:if test="${ovo1.status==0}">
-						box_packaged.png</c:if>
-						<c:if test="${ovo1.status==1}">box_opened.png</c:if>
-						<c:if test="${ovo1.status==2}">box_canceled.png</c:if>" 
-							alt="발주 상태 이미지" class="mr-3 mt-3 rounded-circle" 
-							style="width: 60px; margin-top: auto !important; margin-bottom: auto !important;">
-						<div class="media-body">
+							<img
+								src="/resources/img/
+							<c:if test="${ovo1.status==0}">box_packaged.png</c:if>
+						  <c:if test="${ovo1.status==1}">box_opened.png</c:if>
+						  <c:if test="${ovo1.status==2}">box_canceled.png</c:if>"
+								alt="발주 상태 이미지" class="mr-3 mt-3 rounded-circle"
+								style="width: 60px; margin-top: auto !important; margin-bottom: auto !important;">
+							<div class="media-body">
 								<h4>
 									김 점장 <small><i>Ordered on ${ovo1.order_sdate}</i></small>
 								</h4>
-								
-						<c:forEach items="${ovol}" var="ovo2">
-						<span>${ovo2.pname} : </span>
-						<span>${ovo2.order_qnt}개/</span>
-						</c:forEach>
-						</div>
-						<div>
-						<button id="ord_recivChk_btn" type="button" class="btn 
+
+								<c:forEach items="${ovol}" var="ovo2">
+									<span>${ovo2.pname} : </span>
+									<span>${ovo2.order_qnt}개/</span>
+								</c:forEach>
+							</div>
+							<div>
+								<button id="ord_recivChk_btn" type="button"
+									class="btn 
 						<c:choose>
 							<c:when test="${ovo1.status==0}">
 							btn-outline-primary 
@@ -196,51 +208,53 @@
 							btn-outline-dark 
 							</c:when>
 						</c:choose>
-						text-dark" 
-						 data-toggle="modal" data-target="#ordStatModal" data-stt="${ovo1.status}" data-wrpno="${ovo1.wrap_no}">
-						<c:choose>
-							<c:when test="${ovo1.status==0}">
+						text-dark"
+									data-toggle="modal" data-target="#ordStatModal"
+									data-stt="${ovo1.status}" data-wrpno="${ovo1.wrap_no}">
+									<c:choose>
+										<c:when test="${ovo1.status==0}">
 							미수령
 							</c:when>
-							<c:when test="${ovo1.status==1}">
+										<c:when test="${ovo1.status==1}">
 							수령완료
 							</c:when>
-							<c:when test="${ovo1.status==2}">
+										<c:when test="${ovo1.status==2}">
 							발주취소
 							</c:when>
-						</c:choose>
-						</button>
-						</div>
-						
+									</c:choose>
+								</button>
+							</div>
+
 						</c:forEach>
 					</div>
 				</c:forEach>
 			</c:when>
-		<c:otherwise>
-		<tr>
-			<th colspan="6"><h3 class="text-center">조회된 발주내역이 없습니다.</h3></th>
-		</tr>
-	</c:otherwise>
-	</c:choose>
-	<ul class="pagination">
-		<c:if test="${pgvo.prev }">
-			<li class="page-item"><a class="page-link"
-				href="/order/orderlist?member_id=${mvo.member_id }&flag_hdate=${infOvo.flag_hdate}&flag_tdate=${infOvo.flag_tdate}&pageNum=${pgvo.beginPagingNum-1}}">Prev</a></li>
-		</c:if>
+			<c:otherwise>
+				<tr>
+					<th colspan="6"><h3 class="text-center">조회된 발주내역이 없습니다.</h3></th>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		<!-- 페이징 -->		
+		<ul class="pagination">
+			<c:if test="${pgvo.prev }">
+				<li class="page-item"><a class="page-link"
+					href="/order/orderlist?member_id=${mvo.member_id }&flag_hdate=${infOvo.flag_hdate}&flag_tdate=${infOvo.flag_tdate}&pageNum=${pgvo.beginPagingNum-1}}">Prev</a></li>
+			</c:if>
 
-		<c:forEach begin="${pgvo.beginPagingNum }" end="${pgvo.endPagingNum }"
-			var="i">
-			<li class="page-item ${pgvo.cri.pageNum == i ? 'active' : ''}">
-				<a class="page-link"
-				href="/order/orderlist?member_id=${mvo.member_id}&flag_hdate=${infOvo.flag_hdate}&flag_tdate=${infOvo.flag_tdate}&pageNum=${i }">${i}</a>
-			</li>
-		</c:forEach>
+			<c:forEach begin="${pgvo.beginPagingNum }"
+				end="${pgvo.endPagingNum }" var="i">
+				<li class="page-item ${pgvo.cri.pageNum == i ? 'active' : ''}">
+					<a class="page-link"
+					href="/order/orderlist?member_id=${mvo.member_id}&flag_hdate=${infOvo.flag_hdate}&flag_tdate=${infOvo.flag_tdate}&pageNum=${i }">${i}</a>
+				</li>
+			</c:forEach>
 
-		<c:if test="${pgvo.next }">
-			<li class="page-item"><a class="page-link"
-				href="/order/orderlist?member_id=${mvo.member_id}&flag_hdate=${infOvo.flag_hdate}&flag_tdate=${infOvo.flag_tdate}&pageNum=${pgvo.endPagingNum + 1 }">Next</a></li>
-		</c:if>
-	</ul>
+			<c:if test="${pgvo.next }">
+				<li class="page-item"><a class="page-link"
+					href="/order/orderlist?member_id=${mvo.member_id}&flag_hdate=${infOvo.flag_hdate}&flag_tdate=${infOvo.flag_tdate}&pageNum=${pgvo.endPagingNum + 1 }">Next</a></li>
+			</c:if>
+		</ul>
 	</div>
 </section>
 <script>
@@ -315,7 +329,7 @@
 			if (large != '-1') {
 				$.getJSON("/order/getMCtgs/"+large, function(mCtgs){
 					$('#mediumCtg option:first-child').nextAll("option").remove();
-					for (let md of mCtgs) {
+			for (let md in mCtgs) {
 						let optionTag = '<option value="'+md.category+'">';
 						optionTag += ''+md.medium+'</option>';
 						$("#mediumCtg").append(optionTag);
@@ -338,26 +352,21 @@
 					dataBox[dataBoxCnt+1] = hList;
 					dataBoxCnt += 1;
 					for (let i = 0; i < hList.length; i++) {
-<<<<<<< HEAD
 						tempObj = hList[i];
 						delete tempObj.category;
 						delete tempObj.discount_rate;
 						delete tempObj.get_price;
 						delete tempObj.sell_price;
-						//console.log(tempObj);
-						aJsonArray.push(tempObj);
+					  aJsonArray.push(tempObj);
 					}
 					$('.scrollHList').empty();
  					for (let i = 0; i < aJsonArray.length; i++) {
-						let btnTag = '<button type="button" class="btn btn-outline-primary hgetter" id="hl'+i+'">'+aJsonArray[i].pname+'</button>';
-						$(".scrollHList").append(btnTag);
-=======
+						//let btnTag = '<button type="button" class="btn btn-outline-primary hgetter" id="hl'+i+'">'+aJsonArray[i].pname+'</button>';
+						//$(".scrollHList").append(btnTag);
 						let btnTag = '<button type="button" class="btn btn-outline-primary hgetter" data-boxNum="'+dataBoxCnt+
 						'" data-objNum="'+i+'">'+dataBox[dataBoxCnt][i].pname+'</button>';
 						$(".plistSlot").append(btnTag);
->>>>>>> 30468e00518ec32b79620720d3d47f0feeb6ae67
 					}
-
 				});
 			}else{
 				return 'false';
@@ -376,11 +385,11 @@
 		}else{
 			return false;
 		}
-<<<<<<< HEAD
+
 		let hlnum = "";
 		hlnum =	$(this).attr('id');
 		hlnum = hlnum.substring(2,hlnum.length);
-		//console.log(bJsonArray);
+		
 		hJsn = bJsonArray[hlnum];
 		let bar = hJsn.barcode.toString();
 		bar = bar.substring(0,4);
@@ -398,22 +407,21 @@
         console.log(flag_ord_jsnArr);
         
 				/* let selectItemTags = '<button type="button" class="btn btn-outline-primary" id="'+hlnum+'">'+hJsn.pname+'</button>'
-=======
-				let selectItemTags = '<button type="button" class="btn btn-outline-primary coreBody" data-boxNum="'+boxNum+
-				'" data-objNum="'+objNum+'">'+dataBox[boxNum][objNum].pname+'</button>'
->>>>>>> 30468e00518ec32b79620720d3d47f0feeb6ae67
+    				let selectItemTags = '<button type="button" class="btn btn-outline-primary coreBody" data-boxNum="'+boxNum+
+			    	'" data-objNum="'+objNum+'">'+dataBox[boxNum][objNum].pname+'</button>'
+
 				+'<button type="button" class="btn minus_btn">-</button>'
 				+'<span>1</span>'
 				+'<button type="button" class="btn plus_btn">+</button>';
-<<<<<<< HEAD
+
 				$(".SelectList").append(selectItemTags);
 				$("#"+hlnum+"").attr('value',hJsn.pname);
 				flag_ord_jsnArr.push(hlnum);
 				console.log("flag");
 			  console.log(flag_ord_jsnArr); */
-=======
+
 				$(".selectedSlot").append(selectItemTags);
->>>>>>> 30468e00518ec32b79620720d3d47f0feeb6ae67
+
 		});
 		
 		$(document).on("click",
@@ -446,7 +454,7 @@
 					type:"GET"
 				}).done(function(result){
 					wrpno = result;
-<<<<<<< HEAD
+
 					for(let i = 0; i<flag_ord_jsnArr.length; i++){
 						tempObj = flag_ord_jsnArr[i];
 						console.log(tempObj);
@@ -462,21 +470,20 @@
 					console.log("pname:"+pname);
 					if (tempObj.pname==pname) {
 						tempObj.order_qnt = $(".SelectList").find("#"+flag_ord_jsnArr[i]+"").nextAll("span").html();
-=======
+
 					for (let i = 0; i < slotLength/4; i++) {
 						let boxNum = $("div.selectedSlot button.coreBody:eq("+i+")").attr('data-boxNum');
 						let objNum = $("div.selectedSlot button.coreBody:eq("+i+")").attr('data-objNum');
 						let tempObj = dataBox[boxNum][objNum];
 						tempObj.order_qnt = $("div.selectedSlot button.coreBody:eq("+i+")").nextAll("span").html();
->>>>>>> 30468e00518ec32b79620720d3d47f0feeb6ae67
+
 						tempObj.member_id = '<c:out value="${mvo.member_id}"/>';
 						tempObj.wrap_no = wrpno;
 						selectJsonArray.push(tempObj);
 					}
-<<<<<<< HEAD
 					} */
-=======
->>>>>>> 30468e00518ec32b79620720d3d47f0feeb6ae67
+
+
 					$.ajax({
 						url:"/order/registOrder",
 						type:"POST",

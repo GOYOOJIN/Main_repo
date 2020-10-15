@@ -39,6 +39,6 @@ delete from tbl_head where barcode=#{barcode}
 </delete>
 <select id="hlist" parameterType="java.lang.Integer" resultType="HeadVO">
 select barcode, pname, category, expire_term, get_price, sell_price, discount_rate, status 
-FROM TBL_HEAD WHERE CATEGORY = #{category} AND status = 0
+from tbl_head where category = #{category} AND status = 0
 </select>
 </mapper>
