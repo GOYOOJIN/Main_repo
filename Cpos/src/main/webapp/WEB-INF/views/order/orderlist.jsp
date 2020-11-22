@@ -8,8 +8,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/resources/js/ksy/datepicker-ko.js"></script>
 <script type="text/javascript">
-
-<c:set var="ses" value="${mid}" scope="session"/>
+	<c:set var="ses" value="${mid}" scope="session"/>
 
 	$(function() {
 		$("#date1").datepicker({
@@ -32,23 +31,23 @@
 			changeMonth : true
 		});
 
-		function setDPcker(flagDate, inputTag){
+		function setDPcker(flagDate, inputTag) {
 			let date = "";
-			if (flagDate=="flag_hdate") {
+			if (flagDate == "flag_hdate") {
 				date = '<c:out value="${infOvo.flag_hdate}"/>';
-			}else if(flagDate=="flag_tdate"){
+			} else if (flagDate == "flag_tdate") {
 				date = '<c:out value="${infOvo.flag_tdate}"/>';
 			}
-			let year = date.slice(0,4);
-			let month = date.slice(4,6);
-			let day = date.slice(6,8);
-			date = year.concat("-",month,"-",day);
-			$('#'+inputTag+'').val(date);
+			let year = date.slice(0, 4);
+			let month = date.slice(4, 6);
+			let day = date.slice(6, 8);
+			date = year.concat("-", month, "-", day);
+			$('#' + inputTag + '').val(date);
 		}
 
-		setDPcker("flag_hdate","date1");
-		setDPcker("flag_tdate","date2");
-		
+		setDPcker("flag_hdate", "date1");
+		setDPcker("flag_tdate", "date2");
+
 		$("#ord_chkupBtn").click(
 				function(e) {
 					e.preventDefault();
@@ -103,32 +102,19 @@
 							<label for="mediumCtg">중분류:</label> <select class="form-control"
 								id="mediumCtg" name="mediumCtg">
 								<option value="-1" selected>선택</option>
-								<option value="01">음료</option>
-								<option value="02">채소/과일</option>
-								<option value="03">정육</option>
-								<option value="01">아이스</option>
-								<option value="02">가공식품</option>
-								<option value="01">과자류</option>
-								<option value="02">라면</option>
-								<option value="03">조미료</option>
-								<option value="01">의류</option>
-								<option value="02">위생용품</option>
-								<option value="03">기타</option>
-								<option value="01">주류</option>
-								<option value="02">담배</option>
 							</select>
 						</div>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="largeCtg">상품 리스트: </label>
-							<div class="plistSlot"></div>
+							<div class="scrollHList"></div>
 						</div>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="largeCtg">선택된 상품:</label>
-							<div class="selectedSlot"></div>
+							<div class="SelectList"></div>
 						</div>
 					</div>
 					<!-- Modal footer -->
@@ -186,7 +172,8 @@
 								style="width: 60px; margin-top: auto !important; margin-bottom: auto !important;">
 							<div class="media-body">
 								<h4>
-									김 점장 <small><i>Ordered on ${ovo1.order_sdate}</i></small>
+									${mvo.member_id } <small><i>Ordered on
+											${ovo1.order_sdate}</i></small>
 								</h4>
 
 								<c:forEach items="${ovol}" var="ovo2">
@@ -235,7 +222,7 @@
 				</tr>
 			</c:otherwise>
 		</c:choose>
-		<!-- 페이징 -->		
+		<!-- 페이징 -->
 		<ul class="pagination">
 			<c:if test="${pgvo.prev }">
 				<li class="page-item"><a class="page-link"
@@ -260,201 +247,247 @@
 <script>
 	$(function() {
 		$('#md_wdiv').hide();
-		
-		$('.ordmodal').on('hidden.bs.modal', function () {
+
+		$('.ordmodal').on('hidden.bs.modal', function() {
 			$(this).find('#largeCtg').val("-1");
 			$(this).find('#mediumCtg').val("-1");
 			$(this).find('.plistSlot').empty();
 			$(this).find('.selectedSlot').empty();
 		});
 		
-		$(document).on("click", "#ord_done_btn, #ord_cancel_btn",
-				function(e){
-			e.preventDefault();
-			let btnId = $(this).attr('id');
-			let stt;
-			//console.log(this);//버튼그자체
-			if (btnId=="ord_done_btn") {
-				stt = 1;
-			}else if(btnId=="ord_cancel_btn"){
-				stt = 2;
-			}
-			let wrpno = this.dataset.wrpno;
-			let id = "${mvo.member_id}";
-			$.ajax({
-				url:"/order/changeStatus",
-				type:"POST",
-				data:{wrap_no:wrpno,
-					status:stt
-				}
-			}).done(function(){
-				alert("요청이 완료됐습니다.");
-				location.replace("/order/orderlist?member_id="+id+"&pageNum=1&flag_hdate=&flag_tdate=");
-			}).fail(function(){
-				alert("요청을 처리하지 못했습니다. 다시 시도해주세요.");
-			});
-		});
-		
-		$(document).on("click", "#ord_recivChk_btn",
-				function(e){
-			e.preventDefault();
-			let stt = this.dataset.stt;
-			let wrpno = this.dataset.wrpno;
-			$("#ord_done_btn").attr("data-wrpno",wrpno);
-			$("#ord_cancel_btn").attr("data-wrpno",wrpno);
-			$("#ordStatModal .modal-body").empty();
-			$(this).parent().prevAll('.media-body').clone().appendTo("#ordStatModal .modal-body");
-			switch (stt) {
-			case "0":
-				$("#ord_done_btn").show();
-				$("#ord_cancel_btn").show();	
-				break;
-			case "1":
-				$("#ord_done_btn").hide();
-				$("#ord_cancel_btn").hide();				
-				break;
-			case "2":
-				$("#ordStatModal .modal-body span, #ordStatModal .media-body h4").css("text-decoration","line-through");
-				$("#ordStatModal .media-body").append("<br><br><p>(취소된 발주)</p>");
-				$("#ord_done_btn").hide();
-				$("#ord_cancel_btn").hide();
-				break;
-			}
-		});
 		
 		
-		$('#largeCtg').change(function() {
-			let large = "";
-			large = $(this).val();
-			if (large != '-1') {
-				$.getJSON("/order/getMCtgs/"+large, function(mCtgs){
-					$('#mediumCtg option:first-child').nextAll("option").remove();
-			for (let md in mCtgs) {
-						let optionTag = '<option value="'+md.category+'">';
-						optionTag += ''+md.medium+'</option>';
-						$("#mediumCtg").append(optionTag);
-					}
-				});
-				$('#md_wdiv').show();
-			}
-		});
+		var oJsonArray = new Array();
+
+		$(document)
+				.on(
+						"click",
+						"#ord_done_btn, #ord_cancel_btn",
+						function(e) {
+							e.preventDefault();
+							let btnId = $(this).attr('id');
+							let stt;
+							let wrpno = this.dataset.wrpno;
+							let id = "${mvo.member_id}";
+							//console.log(this);//버튼그자체
+							if (btnId == "ord_done_btn") {
+								stt = 1;								
+							} else if (btnId == "ord_cancel_btn") {
+								stt = 2;
+							}							
+							$.ajax({
+										url : "/order/changeStatus",
+										type : "POST",
+										data : {
+											wrap_no : wrpno,
+											status : stt
+										}
+									})
+									.done(
+											function() {
+												alert("요청이 완료됐습니다.");
+												location.replace("/order/orderlist?member_id="
+																+ id
+																+ "&pageNum=1&flag_hdate=&flag_tdate=");
+											}).fail(function() {
+										alert("요청을 처리하지 못했습니다. 다시 시도해주세요.");
+									});
+							if(stt == 1) {
+								$.getJSON(
+										"order/getOrderDoneList" + wrap_no,
+										function(ovoList) { 
+											for(let i = 0; i < ovoList.length; i++){
+												tempObj = ovoList[i];																			
+												delete tempObj.order_date;
+												delete tempObj.wrap_no;
+												delete tempObj.status;
+												oJsonArray.push(tempObj);												
+											}																			
+										});
+										$.ajax({
+											url : "order/insertInven",
+											type : "POST",
+											date : JSON.stringify(oJsonArray),
+											contentType : "application/json; charset=utf-8;"
+										})
+										.done(
+												function(result){
+													alert("Inventory 등록완료!");
+													location.reload();
+												})
+												.fail(function(result){
+													alert("inventory 등록실패!")
+												});
+							}
+						});
 		
+		function invenSave(ovoList) {
+			//인벤토리에 보내기 - 이름,개수,날짜,아이디
+			//발주 상태 변경에서 수령완료 누르면 바로 insert되게
+		}		 
+
+		$(document)
+				.on(
+						"click",
+						"#ord_recivChk_btn",
+						function(e) {
+							e.preventDefault();
+							let stt = this.dataset.stt;
+							let wrpno = this.dataset.wrpno;
+							$("#ord_done_btn").attr("data-wrpno", wrpno);
+							$("#ord_cancel_btn").attr("data-wrpno", wrpno);
+							$("#ordStatModal .modal-body").empty();
+							$(this).parent().prevAll('.media-body').clone()
+									.appendTo("#ordStatModal .modal-body");
+							switch (stt) {
+							case "0":
+								$("#ord_done_btn").show();
+								$("#ord_cancel_btn").show();
+								break;
+							case "1":
+								$("#ord_done_btn").hide();
+								$("#ord_cancel_btn").hide();								
+								break;
+							case "2":
+								$(
+										"#ordStatModal .modal-body span, #ordStatModal .media-body h4")
+										.css("text-decoration", "line-through");
+								$("#ordStatModal .media-body").append(
+										"<br><br><p>(취소된 발주)</p>");
+								$("#ord_done_btn").hide();
+								$("#ord_cancel_btn").hide();
+								break;
+							}
+						}); 
+
+		$('#largeCtg')
+				.change(
+						function() {
+							let large = "";
+							large = $(this).val();
+							if (large != '-1') {
+								$
+										.getJSON(
+												"/order/getMCtgs/" + large,
+												function(mCtgs) {
+													$(
+															'#mediumCtg option:first-child')
+															.nextAll("option")
+															.remove();
+													for (let md of mCtgs) {
+														let optionTag = '<option value="'+md.category+'">'														
+																+ md.medium
+																+ '</option>';
+														$("#mediumCtg").append(
+																optionTag);
+													}
+												});
+								$('#md_wdiv').show();
+							}
+						});
+		var aJsonArray = new Array();
+		var bJsonArray = new Array();
 		var selectJsonArray = new Array();
-		var dataBox = new Object();
-		var dataBoxCnt = 0;
 		
-		$('#mediumCtg').change(function() {
-			$('.plistSlot').empty();
-			let large = $('#largeCtg').val();
-			let category = $(this).val();
-			if (large!='-1'&&category!='-1') {			
-				$.getJSON("/order/getHList/"+category, function(hList){
-					dataBox[dataBoxCnt+1] = hList;
-					dataBoxCnt += 1;
-					for (let i = 0; i < hList.length; i++) {
-						tempObj = hList[i];
-						delete tempObj.category;
-						delete tempObj.discount_rate;
-						delete tempObj.get_price;
-						delete tempObj.sell_price;
-					  aJsonArray.push(tempObj);
-					}
-					$('.scrollHList').empty();
- 					for (let i = 0; i < aJsonArray.length; i++) {
-						//let btnTag = '<button type="button" class="btn btn-outline-primary hgetter" id="hl'+i+'">'+aJsonArray[i].pname+'</button>';
-						//$(".scrollHList").append(btnTag);
-						let btnTag = '<button type="button" class="btn btn-outline-primary hgetter" data-boxNum="'+dataBoxCnt+
-						'" data-objNum="'+i+'">'+dataBox[dataBoxCnt][i].pname+'</button>';
-						$(".plistSlot").append(btnTag);
-					}
-				});
-			}else{
-				return 'false';
+		var hJsn = new Object();
+		var tempObj = new Object();
+
+		$('#mediumCtg')
+				.change(
+						function() {
+							
+							let large = $('#largeCtg').val();
+							let category = $(this).val();
+							if (large != '-1' && category != '-1') {
+								$.getJSON(
+												"/order/getHList/" + category,
+												function(hList) {
+													
+													for (let i = 0; i < hList.length; i++) {
+														tempObj = hList[i];
+														delete tempObj.category;
+														delete tempObj.discount_rate;
+														delete tempObj.get_price;
+														delete tempObj.sell_price;
+														aJsonArray
+																.push(tempObj);
+													}
+													$('.scrollHList').empty();
+													for (let i = 0; i < aJsonArray.length; i++) {
+														let btnTag = '<button type="button" class="btn btn-outline-primary hgetter" id="hl'+i+'">'+aJsonArray[i].pname+'</button>';
+														$(".scrollHList").append(btnTag);
+														
+													}
+												});
+								bJsonArray = aJsonArray;
+								aJsonArray.length = 0;
+							} else {
+								return 'false';
+							}
+						});
+		
+		var flag_ord_jsnArr = new Array();
+
+		$(document)
+				.on(
+						"click",
+						".hgetter",
+						function(e) {
+							e.preventDefault();
+						
+							let chker = this.dataset.chker;
+							if (chker == null) {
+								$(this).attr('data-chker', 'true');
+							} else {
+								return false;
+							}
+
+							let hlnum = "";
+							hlnum = $(this).attr('id');
+							hlnum = hlnum.substring(2, hlnum.length);
+
+							hJsn = bJsonArray[hlnum];
+							let bar = hJsn.barcode.toString();
+							bar = bar.substring(0, 4);
+							console.log(bar);
+							console.log(hJsn);
+							let pname = hJsn.pname;
+							let selectItemTags = '<button type="button" class="btn btn-outline-primary" id="'+pname+'">'
+									+ hJsn.pname
+									+ '</button>'
+									+ '<button type="button" class="btn minus_btn">-</button>'
+									+ '<span>1</span>'
+									+ '<button type="button" class="btn plus_btn">+</button>';
+							$(".SelectList").append(selectItemTags);
+							$("#" + pname + "").attr('value', hJsn.pname);
+							flag_ord_jsnArr.push(hJsn);
+							console.log("flag");
+							console.log(flag_ord_jsnArr);						
+						});
+
+		$(document).on("click", ".minus_btn", function(e) {
+			e.preventDefault();
+			if ($(this).next('span').html() == 1) {
+				alert("더이상 줄일 수 없습니다.");
+			} else {
+				$(this).next('span').html($(this).next('span').html() - 1);
 			}
 		});
-		
-		$(document).on("click",
-		".hgetter",
-		function(e){
-		e.preventDefault();
-		let boxNum = $(this).attr('data-boxNum');
-		let objNum = $(this).attr('data-objNum');
-		let chker = this.dataset.chker;
-		if (chker == null) {
-		$(this).attr('data-chker','true');
-		}else{
-			return false;
-		}
 
-		let hlnum = "";
-		hlnum =	$(this).attr('id');
-		hlnum = hlnum.substring(2,hlnum.length);
-		
-		hJsn = bJsonArray[hlnum];
-		let bar = hJsn.barcode.toString();
-		bar = bar.substring(0,4);
-		console.log(bar);
-		console.log(hJsn);
-		let pname = hJsn.pname;
-		    let selectItemTags = '<button type="button" class="btn btn-outline-primary" id="'+pname+'">'+hJsn.pname+'</button>'
-        +'<button type="button" class="btn minus_btn">-</button>'
-        +'<span>1</span>' 
-        +'<button type="button" class="btn plus_btn">+</button>';
-        $(".SelectList").append(selectItemTags);
-        $("#"+pname+"").attr('value',hJsn.pname);
-        flag_ord_jsnArr.push(hJsn);
-        console.log("flag");
-        console.log(flag_ord_jsnArr);
-        
-				/* let selectItemTags = '<button type="button" class="btn btn-outline-primary" id="'+hlnum+'">'+hJsn.pname+'</button>'
-    				let selectItemTags = '<button type="button" class="btn btn-outline-primary coreBody" data-boxNum="'+boxNum+
-			    	'" data-objNum="'+objNum+'">'+dataBox[boxNum][objNum].pname+'</button>'
-
-				+'<button type="button" class="btn minus_btn">-</button>'
-				+'<span>1</span>'
-				+'<button type="button" class="btn plus_btn">+</button>';
-
-				$(".SelectList").append(selectItemTags);
-				$("#"+hlnum+"").attr('value',hJsn.pname);
-				flag_ord_jsnArr.push(hlnum);
-				console.log("flag");
-			  console.log(flag_ord_jsnArr); */
-
-				$(".selectedSlot").append(selectItemTags);
-
+		$(document).on("click", ".plus_btn", function(e) {
+			e.preventDefault();
+			$(this).prev('span').html(Number($(this).prev('span').html()) + 1);
 		});
 		
-		$(document).on("click",
-				".minus_btn",
-				function(e){
+		$("#ord_insert_btn").on("click",function(e){
 			e.preventDefault();
-			if($(this).next('span').html()==1){
-				alert("더이상 줄일 수 없습니다.");				
-			}else{
-				$(this).next('span').html($(this).next('span').html()-1);
-			}
-		});
-		
-		$(document).on("click",
-				".plus_btn",
-				function(e){
-			e.preventDefault();
-				$(this).prev('span').html(Number($(this).prev('span').html())+1);
-		});
-
-		$(document).on("click",
-				"#ord_insert_btn",
-				function(e){
-			e.preventDefault();
-			let slotLength = $(".selectedSlot").children().length;
-			if (slotLength>0) {
+			if (flag_ord_jsnArr.length>0) {
 				let wrpno = -1;
 				$.ajax({
 					url:"/order/getWrpno",
 					type:"GET"
 				}).done(function(result){
 					wrpno = result;
-
 					for(let i = 0; i<flag_ord_jsnArr.length; i++){
 						tempObj = flag_ord_jsnArr[i];
 						console.log(tempObj);
@@ -463,51 +496,39 @@
 						tempObj.wrap_no = wrpno;
 						selectJsonArray.push(tempObj);
 					}
-					/* for (let i = 0; i < flag_ord_jsnArr.length; i++) {
-					tempObj = bJsonArray[flag_ord_jsnArr[i]];
-					console.log(tempObj);
-					let pname = $(".SelectList").find("#"+flag_ord_jsnArr[i]+"").val();
-					console.log("pname:"+pname);
-					if (tempObj.pname==pname) {
-						tempObj.order_qnt = $(".SelectList").find("#"+flag_ord_jsnArr[i]+"").nextAll("span").html();
+					
+					$.ajax(
+							{
+								url : "/order/registOrder",
+								type : "POST",
+								data : JSON
+										.stringify(selectJsonArray),
+								contentType : "application/json; charset=utf-8;"
+							})
+					.done(
+							function(
+									result) {
+								alert("등록이 완료됐습니다.");
+								location
+										.reload();
+							})
+					.fail(
+							function(
+									result) {
+								alert("발주등록 실패. 관리자에게 문의하세요");
+							});
+		}).fail(function(result) {
+	alert("wrap_no 가져오기 실패");
+});
+} else {
+alert("orderlist_258 error. 관리자에 문의하세요.");
+location.reload();
+}
 
-					for (let i = 0; i < slotLength/4; i++) {
-						let boxNum = $("div.selectedSlot button.coreBody:eq("+i+")").attr('data-boxNum');
-						let objNum = $("div.selectedSlot button.coreBody:eq("+i+")").attr('data-objNum');
-						let tempObj = dataBox[boxNum][objNum];
-						tempObj.order_qnt = $("div.selectedSlot button.coreBody:eq("+i+")").nextAll("span").html();
+});
 
-						tempObj.member_id = '<c:out value="${mvo.member_id}"/>';
-						tempObj.wrap_no = wrpno;
-						selectJsonArray.push(tempObj);
-					}
-					} */
-
-
-					$.ajax({
-						url:"/order/registOrder",
-						type:"POST",
-						data:JSON.stringify(selectJsonArray),
-						contentType: "application/json; charset=utf-8;"
-					}).done(function(result){
-						alert("등록이 완료됐습니다.");
-						location.reload();
-					}).fail(function(result){
-					alert("발주등록 실패. 관리자에게 문의하세요");
-					});
-				}).fail(function(result){
-					alert("wrap_no 가져오기 실패");
-				});
-			}else{
-				alert("orderlist_258 error. 관리자에 문의하세요.");
-				location.reload();
-			}
-			
-		});
-		
-	});
-	function invenSave(ovolist){
-		//인벤토리에 보내기 -이름,개수,날짜,아이디
-	}
+});		
+													
+	
 </script>
 <jsp:include page="../common/footer.jsp"></jsp:include>

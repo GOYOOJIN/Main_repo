@@ -33,10 +33,12 @@
 									<option value="50">기호품</option>
 								</select>
 							</div>
+						
+							
 							<div class="form-group">
-								<label for="medium">중분류</label> <select class="form-control"
-									id="medium" name="medium">
-									<option value="-1" selected>선택</option>
+								<label for="medium">중분류</label> 
+									<select class="form-control"
+									id="medium" name="medium">										
 									<option value="01">음료</option>
 									<option value="02">채소/과일</option>
 									<option value="03">정육</option>
@@ -48,9 +50,9 @@
 									<option value="01">의류</option>
 									<option value="02">위생용품</option>
 									<option value="03">기타</option>
-									<option value="01">주류</option>
+								  <option value="01">주류</option>
 									<option value="02">담배</option>
-								</select>
+									</select>									
 							</div>
 						</div>
 					</c:when>
@@ -79,7 +81,7 @@
 				</c:choose>
 			</div>
 
-			
+
 		</div>
 		<div>
 			<ul class="pagination">

@@ -16,4 +16,6 @@ public interface OrderServiceIntf {
 	public int getUnderAmount(OrderVO ovo, int pageNum);
 	public List<CategoryVO> getMCtgs(String large);
 	public int getWrapno();
+	public List<OrderVO> getOrderDoneList(int wrap_no);
+	public int insertInven(List<OrderVO> ivo);	
 }

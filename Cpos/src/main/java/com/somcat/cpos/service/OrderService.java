@@ -72,4 +72,15 @@ public class OrderService implements OrderServiceIntf {
 		int rs = odao.getWrapno();
 		return rs+1;
 	}
+
+	@Override
+	public List<OrderVO> getOrderDoneList(int wrap_no) {
+		return odao.getOrderDoneList(wrap_no);
+	}
+
+	@Override
+	public int insertInven(List<OrderVO> ivo) {
+		return odao.insertInven(ivo);
+	}
+
 }

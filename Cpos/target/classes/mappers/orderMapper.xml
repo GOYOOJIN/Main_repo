@@ -18,7 +18,15 @@ wrap_no, expire_term, status from
   )body where body.rank BETWEEN (#{cri.underamount}+1) AND (#{cri.underamount} + #{cri.amount})
   ]]>
 	</select>
-	
+	<insert id="insertinven" parameterType="java.util.List">
+	insert into tbl_inventory (inventory_no, member_id, inv_qnt, barcode, pname, category, get_price, sell_price, expire_date, discount_rate, status)
+	select seq_inventory_no.nextval as inventory_no, a.* from(
+	<foreach collection="list" item="ivo" separator="UNION ALL">
+	 select #{ivo.member_id} as member_id, #{ivo.order_qnt} as inv_qnt, #{ivo.barcode} as barcode, #{ivo.pname} as pname, #{ivo.category} as category,
+	 #{ivo.get_price} as get_price, #{ivo.sell_price} as sell_price, #{ivo.get_date} as expire_date, #{ivo.discount_rate} as discount_rate from dual
+	</foreach>
+	) a , 0)
+	</insert>
 	<insert id="order" parameterType="java.util.List">
 		insert into tbl_order (order_no, member_id, barcode, pname, category, get_price, 
 		sell_price, discount_rate, order_qnt, order_date, wrap_no, expire_term, status) 
@@ -80,4 +88,4 @@ wrap_no, expire_term, status from
 		</if>
 		where wrap_no = #{wrap_no}
 	</update>
-</mapper>
+	</mapper>

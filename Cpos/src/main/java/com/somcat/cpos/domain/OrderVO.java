@@ -67,7 +67,11 @@ public class OrderVO {
 		this.flag_hdate = flag_hdate;
 		this.flag_tdate = flag_tdate;
 	}
-
+	//get orderDoneList
+	public OrderVO(int wrap_no) {
+		this.wrap_no = wrap_no;
+	}
+	
 	public int getDiscount_rate() {
 		return discount_rate;
 	}

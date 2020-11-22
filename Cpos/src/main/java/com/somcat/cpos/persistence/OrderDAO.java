@@ -97,4 +97,14 @@ public class OrderDAO implements OrderDAOIntf {
 		return sql.update(ns+"changeOrderStatus",map2);
 	}
 
+	@Override
+	public List<OrderVO> getOrderDoneList(int wrap_no) {
+		return sql.selectList(ns+"donelist", wrap_no);
+	}
+
+	@Override
+	public int insertInven(List<OrderVO> ivo) {
+		return sql.insert(ns+"insertinven", ivo);
+	}
+
 }

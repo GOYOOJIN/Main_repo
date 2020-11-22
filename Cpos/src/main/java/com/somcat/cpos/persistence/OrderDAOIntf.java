@@ -26,4 +26,9 @@ public interface OrderDAOIntf {
 	public int getWrapno();
 
 	public int updateOrderStatus(int wrap_no, int status);
+
+	public List<OrderVO> getOrderDoneList(int wrap_no);
+
+	public int insertInven(List<OrderVO> ivo);
+
 }

@@ -60,7 +60,7 @@ public class OrderCtrl {
 		if (cri.getPageNum() == 1) {
 			cri.setUnderamount(0);
 		} else {
-			cri.setUnderamount(osv.getUnderAmount(ovo, cri.getPageNum()));
+			cri.setUnderamount(osv.getUnderAmount(ovo, cri.getPageNum())); 
 		}
 		List<List<OrderVO>> ordWL = osv.getList(cri, ovo);
 		model.addAttribute("ordWL", ordWL);
@@ -68,7 +68,7 @@ public class OrderCtrl {
 		int totalCount = osv.getTotalCount(ovo);
 		model.addAttribute("pgvo", new PagingVO(totalCount, cri));
 	}
-
+	
 	@GetMapping(value = "/getHList/{category}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<List<HeadVO>> getHList(@PathVariable("category") int category) throws Exception {
@@ -96,6 +96,22 @@ public class OrderCtrl {
 		int isOk = osv.registOrder(ovos);
 		return isOk > 0 ? new ResponseEntity<>("발주등록이 완료됐습니다.", HttpStatus.OK) 
 						: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "/insertInven")
+	public ResponseEntity<String> insertInven(@RequestBody List<OrderVO> ivo) throws Exception {
+		int isOk = osv.insertInven(ivo);
+		return isOk > 0 ? new ResponseEntity<>("Inventory에 등록이 완료됐습니다.", HttpStatus.OK) 
+						: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
+	
+	
+	@GetMapping(value = "/getOrderDoneList/{wrpno}", produces = { MediaType.APPLICATION_XML_VALUE, 
+			MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<OrderVO>> getOrderDoneList(@PathVariable("wrpno") int wrap_no) throws Exception { 
+		List<OrderVO> ovoList = osv.getOrderDoneList(wrap_no);
+		return new ResponseEntity<>(ovoList, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/order")
